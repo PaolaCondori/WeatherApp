@@ -24,10 +24,7 @@ namespace WeatherApp.ViewModels
         string country;
 
         [ObservableProperty]
-        string cityCountry;
-
-        [ObservableProperty]
-        string cityName /*= "São Paulo"*/;
+        string cityName;
 
         [ObservableProperty]
         string cidadePais;
@@ -82,7 +79,7 @@ namespace WeatherApp.ViewModels
         public async void GetWeather(WeatherModel weatherModel) /*requisição get*/
         {
             WeatherAppService weatherAppService = new WeatherAppService();/*Criando um novo WeatherService*/
-            /*WeatherModel = await weatherAppService.GetWeatherAsync(CityName);*//*atribuindo valor a WeatherModel*/
+           
 
             /*vinculando os atributos com as classes classes*/
 
@@ -91,7 +88,7 @@ namespace WeatherApp.ViewModels
             {
                 CityName = WeatherModel.Name;
                 Country = WeatherModel.Sys.Country;
-                CidadePais = WeatherModel.Name + "" + WeatherModel.Sys.Country;
+                CidadePais = WeatherModel.Name + ", " + WeatherModel.Sys.Country;
                 
                 Icon = WeatherModel.Weather[0].Icon;
                 string ImageUrl = $"https://openweathermap.org/img/wn/{Icon}@4x.png";

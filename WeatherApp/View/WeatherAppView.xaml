@@ -4,43 +4,33 @@
              x:Class="WeatherApp.View.WeatherAppView"
              BackgroundColor="#E6EDFE">
 
-       <!--
-         <Label Text="City:" />
- <Entry Placeholder="Cidade" Text="{Binding CityName}"/>
- <Label Text="{Binding LocalTimezoneFormat}"/>
- <Label Text="{Binding CityName}" FontSize="20" />
 
- <Button Text="Get Weather" Command="{Binding getWeatherCommand}" />
-
- <Image Source="{Binding WeatherImage}" HeightRequest="50" WidthRequest="50"/>
- <Label Text="Temperature:" />
- <Label Text="{Binding Temp, StringFormat='{0}°C'}" FontSize="24" />
- <Label Text="{Binding Description}"/>
-        -->
     <ScrollView>
         <VerticalStackLayout>
             
         
         <Frame 
             BackgroundColor="#ECF4FD"
-            WidthRequest="{OnIdiom 100, Phone=360, Tablet=300, Desktop=580}"
-            HeightRequest="{OnIdiom 100, Phone=50, Tablet=300, Desktop=76}"
+            WidthRequest="{OnIdiom 100, Phone=360, Desktop=680}"
+            HeightRequest="{OnIdiom 100, Phone=50, Desktop=76}"
             VerticalOptions="Start"
             Margin="0, 40, 0, 40"
             Padding="0"
             CornerRadius="10"
             BorderColor="Transparent"
             HasShadow="True">
-                <HorizontalStackLayout WidthRequest="{OnIdiom Phone=350, Desktop=560}" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Entry Text="{Binding CityName}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: Salvador " FontSize="{OnIdiom 100, Phone=20, Tablet=300, Desktop=20}" WidthRequest="{OnIdiom 100, Phone=180, Tablet=300, Desktop=490}" TextColor="Black"/>
-                    <Entry Text="{Binding Country}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: br" FontSize="{OnIdiom 100, Phone=20, Tablet=300, Desktop=20}" WidthRequest="{OnIdiom Phone=100, Tablet=300, Desktop=490}" TextColor="Black"/>
-                    <ImageButton Command="{Binding GetWeatherCityCommand}" BackgroundColor="#C8DEFF" WidthRequest="{OnIdiom Phone=40,Desktop=55}" HeightRequest="{OnIdiom Phone=40,Desktop=77}" Source="lupa.png" Margin="10" CornerRadius="10"/>
+                
+                <HorizontalStackLayout WidthRequest="{OnIdiom Phone=350, Desktop=700}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Entry Text="{Binding CityName}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: Salvador " FontSize="{OnIdiom 100, Phone=20, Tablet=300, Desktop=20}" WidthRequest="{OnIdiom 100, Phone=180, Desktop=450}" TextColor="Black"/>
+                    <Entry Text="{Binding Country}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: br" FontSize="{OnIdiom 100, Phone=20, Desktop=20}" WidthRequest="{OnIdiom Phone=100,Desktop=100}" TextColor="Black"/>
+                    <ImageButton Command="{Binding GetWeatherCityCommand}" BackgroundColor="#C8DEFF" WidthRequest="{OnIdiom Phone=40,Desktop=66}" HeightRequest="{OnIdiom Phone=40,Desktop=77}" Source="lupa.png" Margin="10" CornerRadius="10"/>
                 </HorizontalStackLayout>
                 
                 
             </Frame>
-
-        <!-- Painel principal -->
+      
+            
+            <!-- Painel principal -->
         <Frame
           WidthRequest="{OnIdiom Phone=400,Desktop=1200}" 
           HeightRequest="650"
@@ -80,7 +70,7 @@
                     <Frame  Grid.Row="1" WidthRequest="{OnIdiom Phone=430,Desktop=1000}" HeightRequest="500" BackgroundColor="Transparent" BorderColor="Transparent" Margin="0,0,0, 25">
                     
                     <VerticalStackLayout HeightRequest="500">
-                            <Label Text="{Binding Description}" Margin="0,0,0, 10" FontFamily="Poppins" FontSize="40" VerticalTextAlignment="Start" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Description}" TextColor="Black" Margin="0,0,0, 10" FontFamily="Poppins" FontSize="40" VerticalTextAlignment="Start" HorizontalOptions="Center"/>
                         
                         <!-- Infomações principais: Img, temp, min e max -->
                             <Grid BackgroundColor="Transparent" WidthRequest="{OnIdiom Phone=350,Desktop=480}" HeightRequest="180">
@@ -90,7 +80,7 @@
                             </Grid.ColumnDefinitions>
 
                                 <Frame Padding="0" Grid.Column="0" WidthRequest="{OnIdiom Phone=150,Desktop=180}" Margin="0, 0, 20, 0" BackgroundColor="Transparent" BorderColor="Transparent">
-                                    <Image Source="{Binding WeatherImage}" WidthRequest="{OnIdiom Phone=200,Desktop=600}"/>
+                                    <Image Source="{Binding WeatherImage}" WidthRequest="{OnIdiom Phone=200,Desktop=200}"/>
                                 </Frame>
 
                                 <VerticalStackLayout Grid.Column="1" WidthRequest="220" Margin="20,0,0,0" HorizontalOptions="Start">
@@ -229,53 +219,3 @@
     </ScrollView>
 </ContentPage>
     
-<!--
-            <Border  
-               WidthRequest="1200" 
-HeightRequest="50"
-BackgroundColor="#A5C2E2" 
-VerticalOptions="End" 
-HorizontalOptions="Center" 
-Margin="0,0,0,80"
-
-                Padding="0"
-                Stroke="Transparent">   
-                <Border.Shadow>
-                    <Shadow
-                        Radius="10"
-                        Brush="Black"
-                        Opacity="0.5"
-                        Offset="0,0"/>
-                </Border.Shadow>
-            </Border>
-            -->
-<!--<AbsoluteLayout>
-                  <Label
-                      FontAttributes="Bold"
-                      FontFamily="zCool"
-                      FontSize="109"
-                      HorizontalOptions="Center"
-                      Text="R"
-                      TextColor="#FFEBC5"
-                      VerticalOptions="Center" />
-
-                  <Label
-                      FontAttributes="Bold"
-                      FontFamily="zCool"
-                      FontSize="105"
-                      Text="R"
-                      TextColor="#2B4872" />-->
-<!--<Rectangle Fill="Blue"
-   Stroke="Black"
-   StrokeThickness="3"
-   RadiusX="50"
-   RadiusY="10"
-   WidthRequest="200"
-   HeightRequest="100"
-   HorizontalOptions="Start">
-            <Rectangle.Shadow>
-                <Shadow Offset="10,10" Brush="Black" Radius="0"></Shadow>
-            </Rectangle.Shadow>
-        </Rectangle>
-
--->
