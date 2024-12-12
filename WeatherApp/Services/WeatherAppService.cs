@@ -16,7 +16,7 @@ namespace WeatherApp.Services
             private JsonSerializerOptions jsonSerializerOptions;
             private string url = $"https://api.openweathermap.org/data/2.5/weather?";
             private Uri uri;
-
+            private string key; /*Coloque sua chave do openWeatherAPI aqui ex: string key  = 12345;*/
 
         public WeatherAppService()
             {
@@ -29,12 +29,12 @@ namespace WeatherApp.Services
             }
 
             public async Task<WeatherModel> GetWeatherAsync(string cityName, string Country) 
-            {/*string countryCode*/
+            {
 
 
             try
             {
-                uri = new Uri(url + $"q={cityName},{Country}" + $"&appid=1a1f2150d9d9658cbc6e07b8efc9c9ee&lang=pt_br&units=metric");
+                uri = new Uri(url + $"q={cityName},{Country}" + $"&appid={key}&lang=pt_br&units=metric");
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                     if (response.IsSuccessStatusCode)
                     {
