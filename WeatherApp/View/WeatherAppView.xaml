@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.View.WeatherAppView"
+             BackgroundColor="#E6EDFE">
+
+       <!--
+         <Label Text="City:" />
+ <Entry Placeholder="Cidade" Text="{Binding CityName}"/>
+ <Label Text="{Binding LocalTimezoneFormat}"/>
+ <Label Text="{Binding CityName}" FontSize="20" />
+
+ <Button Text="Get Weather" Command="{Binding getWeatherCommand}" />
+
+ <Image Source="{Binding WeatherImage}" HeightRequest="50" WidthRequest="50"/>
+ <Label Text="Temperature:" />
+ <Label Text="{Binding Temp, StringFormat='{0}°C'}" FontSize="24" />
+ <Label Text="{Binding Description}"/>
+        -->
+    <ScrollView>
+        <VerticalStackLayout>
+            
+        
+        <Frame 
+            BackgroundColor="#ECF4FD"
+            WidthRequest="{OnIdiom 100, Phone=360, Tablet=300, Desktop=580}"
+            HeightRequest="{OnIdiom 100, Phone=50, Tablet=300, Desktop=76}"
+            VerticalOptions="Start"
+            Margin="0, 40, 0, 40"
+            Padding="0"
+            CornerRadius="10"
+            BorderColor="Transparent"
+            HasShadow="True">
+                <HorizontalStackLayout WidthRequest="{OnIdiom Phone=350, Desktop=560}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Entry Text="{Binding CityName}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: Salvador " FontSize="{OnIdiom 100, Phone=20, Tablet=300, Desktop=20}" WidthRequest="{OnIdiom 100, Phone=180, Tablet=300, Desktop=490}" TextColor="Black"/>
+                    <Entry Text="{Binding Country}" HorizontalOptions="{OnIdiom  Phone=Start, Desktop=Center}" Placeholder="ex: br" FontSize="{OnIdiom 100, Phone=20, Tablet=300, Desktop=20}" WidthRequest="{OnIdiom Phone=100, Tablet=300, Desktop=490}" TextColor="Black"/>
+                    <ImageButton Command="{Binding GetWeatherCityCommand}" BackgroundColor="#C8DEFF" WidthRequest="{OnIdiom Phone=40,Desktop=55}" HeightRequest="{OnIdiom Phone=40,Desktop=77}" Source="lupa.png" Margin="10" CornerRadius="10"/>
+                </HorizontalStackLayout>
+                
+                
+            </Frame>
+
+        <!-- Painel principal -->
+        <Frame
+          WidthRequest="{OnIdiom Phone=400,Desktop=1200}" 
+          HeightRequest="650"
+          BackgroundColor="#A5C2E2" 
+          VerticalOptions="End" 
+          HorizontalOptions="Center" 
+          Margin="0,0,0,30"
+          Padding="0"
+          CornerRadius="10"
+          BorderColor="Transparent">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <!--Cidade, país e data -->
+                <Frame Grid.Row="0"
+                    BackgroundColor="#C0D9F5"
+                    Margin="0, 10, 0, 0"
+                    Padding="0"
+                    CornerRadius="10"
+                    BorderColor="Transparent"
+                    WidthRequest="{OnIdiom Phone=200,Desktop=310}"
+                    HeightRequest="70"
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="Start">
+                    <VerticalStackLayout>
+                            <Label Text="{Binding CidadePais}" TextColor="Black" FontFamily="Poppins" Padding="10, 0, 0, 0" FontSize="{OnIdiom Desktop= 30, Phone=20}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                            <Label Text="{Binding LocalTimezoneFormat}" TextColor="Black" FontFamily="Poppins" Padding="10, 0, 0, 0" Margin="0,0,0,5" FontSize="16" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+       
+                <!-- Painel clima -->
+                    <Frame  Grid.Row="1" WidthRequest="{OnIdiom Phone=430,Desktop=1000}" HeightRequest="500" BackgroundColor="Transparent" BorderColor="Transparent" Margin="0,0,0, 25">
+                    
+                    <VerticalStackLayout HeightRequest="500">
+                            <Label Text="{Binding Description}" Margin="0,0,0, 10" FontFamily="Poppins" FontSize="40" VerticalTextAlignment="Start" HorizontalOptions="Center"/>
+                        
+                        <!-- Infomações principais: Img, temp, min e max -->
+                            <Grid BackgroundColor="Transparent" WidthRequest="{OnIdiom Phone=350,Desktop=480}" HeightRequest="180">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{OnIdiom Phone=100,Desktop=200}"/>
+                                    <ColumnDefinition Width="{OnIdiom Phone=50,Desktop=100}"/>
+                            </Grid.ColumnDefinitions>
+
+                                <Frame Padding="0" Grid.Column="0" WidthRequest="{OnIdiom Phone=150,Desktop=180}" Margin="0, 0, 20, 0" BackgroundColor="Transparent" BorderColor="Transparent">
+                                    <Image Source="{Binding WeatherImage}" WidthRequest="{OnIdiom Phone=200,Desktop=600}"/>
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1" WidthRequest="220" Margin="20,0,0,0" HorizontalOptions="Start">
+                                    <Label Text="{Binding Temp, StringFormat='{0}°C'}" TextColor="Black" FontSize="{OnIdiom Phone=70,Desktop=80}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,20,0,0"/>
+                                    <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+
+                                        <!--Temp max e min-->
+                                        <Frame Grid.Column="0" BorderColor="Transparent" Padding="0" Margin="0,0,0,0" BackgroundColor="#D4E3F5" WidthRequest="100" HeightRequest="30" >
+                                            <Label Text="{Binding TempMax, StringFormat='Max - {0}°C'}" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        </Frame>
+                                        <Frame Grid.Column="1" BorderColor="Transparent" Padding="0" Margin="0,0,0,0" BackgroundColor="#D4E3F5" WidthRequest="100" HeightRequest="30">
+                                            <Label Text="{Binding TempMin, StringFormat='Min - {0}°C'}" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        </Frame>
+                                        </Grid>
+                                    
+                                </VerticalStackLayout>
+
+                            </Grid>
+
+                        <!--Outras informações do Clima-->
+
+                            <Grid BackgroundColor="Transparent" WidthRequest="{OnIdiom Phone=400,Desktop=600}" HeightRequest="200" Margin="0, 40, 0, 0" HorizontalOptions="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+
+                                <!--Bloco 1-->
+                                <Frame Padding="0" Grid.Column="0" Grid.Row="0" WidthRequest="{OnIdiom Phone=190,Desktop=250}" HeightRequest="80" BorderColor="Transparent" BackgroundColor="#D4E3F5" >
+                                        <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{OnIdiom Phone=70,Desktop=90}"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                            <!--Icon: sensação térmica -->
+                                        <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" Grid.Column="0" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Image Source="feels_like.png" WidthRequest="{OnIdiom Phone=30,Desktop=45}"/>
+                                        </Frame>
+                                            
+                                            <!--Informações-->
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start" HeightRequest="80">
+                                            <Label TextColor="Black" Text="Sensação" FontSize="{OnIdiom Phone=20,Desktop=30}" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                            <Label TextColor="Black" Text="{Binding FeelsLike, StringFormat='{0}°C'}" FontSize="20" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                        </VerticalStackLayout>
+                                        </Grid>
+                                </Frame>
+
+                                <!--Bloco 2-->
+                                <Frame Padding="0" Grid.Column="1" Grid.Row="0" WidthRequest="{OnIdiom Phone=190,Desktop=250}" HeightRequest="80" BorderColor="Transparent" BackgroundColor="#D4E3F5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{OnIdiom Phone=70,Desktop=90}"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Icon-->
+                                        <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" Grid.Column="0" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Image Source="visibility.png" WidthRequest="{OnIdiom Phone=45,Desktop=60}"/>
+                                        </Frame>
+
+                                        <!--Informações-->
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start" HeightRequest="80">
+                                            <Label TextColor="Black" Text="Visibilidade" FontSize="{OnIdiom Desktop= 30, Phone=20}" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                            <Label TextColor="Black" Text="{Binding Visibility, StringFormat='{0} km/h'}" FontSize="{OnIdiom Desktop= 20, Phone=20}" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                                    
+                                <!--Bloco 3-->
+                                <Frame Padding="0" Grid.Column="0" Grid.Row="1" WidthRequest="{OnIdiom Phone=190,Desktop=250}" HeightRequest="80" BorderColor="Transparent" BackgroundColor="#D4E3F5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{OnIdiom Phone=70,Desktop=90}"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Icon-->
+                                        <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" Grid.Column="0" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Image Source="wind.png"  WidthRequest="{OnIdiom Phone=60,Desktop=80}"/>
+                                        </Frame>
+
+                                        <!--Informações-->
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start" HeightRequest="80">
+                                            <Label TextColor="Black" Text="Velocidade" FontSize="{OnIdiom Desktop= 30, Phone=20}" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                            <Label TextColor="Black" Text="{Binding Velocity, StringFormat='{0} m/s'}" FontSize="20" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+
+                                <!--Bloco 4-->
+                                <Frame Padding="0" Grid.Column="1" Grid.Row="1" WidthRequest="{OnIdiom Phone=190,Desktop=250}" HeightRequest="80" BorderColor="Transparent" BackgroundColor="#D4E3F5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{OnIdiom Phone=70,Desktop=90}"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Icon-->
+                                        <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" Grid.Column="0" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start">
+                                            <Image Source="humidity.png"  WidthRequest="{OnIdiom Phone=50,Desktop=60}"/>
+                                        </Frame>
+
+                                        <!--Informações-->
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start" HeightRequest="80">
+                                            <Label TextColor="Black" Text="Humidade" FontSize="{OnIdiom Desktop= 30, Phone=20}" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                            <Label TextColor="Black" Text="{Binding Humidity, StringFormat='{0}%'}" FontSize="20" FontFamily="Poppins" HorizontalTextAlignment="Start"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+
+                            </Grid>
+                        
+
+
+                        
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            
+            
+        
+        </Frame>
+    
+    
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+    
+<!--
+            <Border  
+               WidthRequest="1200" 
+HeightRequest="50"
+BackgroundColor="#A5C2E2" 
+VerticalOptions="End" 
+HorizontalOptions="Center" 
+Margin="0,0,0,80"
+
+                Padding="0"
+                Stroke="Transparent">   
+                <Border.Shadow>
+                    <Shadow
+                        Radius="10"
+                        Brush="Black"
+                        Opacity="0.5"
+                        Offset="0,0"/>
+                </Border.Shadow>
+            </Border>
+            -->
+<!--<AbsoluteLayout>
+                  <Label
+                      FontAttributes="Bold"
+                      FontFamily="zCool"
+                      FontSize="109"
+                      HorizontalOptions="Center"
+                      Text="R"
+                      TextColor="#FFEBC5"
+                      VerticalOptions="Center" />
+
+                  <Label
+                      FontAttributes="Bold"
+                      FontFamily="zCool"
+                      FontSize="105"
+                      Text="R"
+                      TextColor="#2B4872" />-->
+<!--<Rectangle Fill="Blue"
+   Stroke="Black"
+   StrokeThickness="3"
+   RadiusX="50"
+   RadiusY="10"
+   WidthRequest="200"
+   HeightRequest="100"
+   HorizontalOptions="Start">
+            <Rectangle.Shadow>
+                <Shadow Offset="10,10" Brush="Black" Radius="0"></Shadow>
+            </Rectangle.Shadow>
+        </Rectangle>
+
+-->
